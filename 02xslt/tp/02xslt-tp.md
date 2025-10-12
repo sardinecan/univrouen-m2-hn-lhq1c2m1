@@ -1,11 +1,58 @@
 # TP 02 XSLT
 
-Transformer un document TEI simple en document HTML.
+## Objectif
+Réaliser une feuille de transformation XSLT permettant de convertir un document TEI simple en un document HTML.
 
-- Créer une premiere règle pour le **nœud document** afin d'appliquer les modèles pour les nœuds descendants.
-- Créer une règle pour l'élément TEI => élément xHTML <HTML/>
-Créer une règle pour l'élément teiHeader => élément xhtml <head/> comportant un élément meta @charset utf8 et un élément title ayant pour valeur la valeur textuelle du noeud tei <title type="main">
-- tranformer l'élément tei body en élément html body  et appliquer les modèles pour les nœuds descendants
-- créer des règles pour transformer les éléments tei head, tei dateline tei p et tei signed en paragraphe html. pour les élément head et dateline vous veillerez à ajouter un attribut class prenant pour valeur le tei @rend 
-- créer une règle pour transformer les tei lb en élément html br
-- créer une règle pour transformer les élements pb en valeur "[@n] "
+---
+
+## Étapes à suivre
+
+### 1. Créer la règle principale pour le document
+Définir une première règle correspondant au **nœud racine du document** afin d’appliquer les modèles aux nœuds descendants.
+
+---
+
+### 2. Transformer l’élément `<TEI>` en `<html>`
+Créer une règle qui transforme l’élément racine `TEI` du document TEI en un élément HTML `<html>`.
+
+---
+
+### 3. Transformer l’en-tête TEI en `<head>` HTML
+Créer une règle pour l’élément `teiHeader` afin qu’il soit transformé en un élément HTML `<head>` contenant :
+
+- Un élément `<meta charset="utf-8"/>`
+- Un élément `<title>` dont la valeur textuelle correspond au contenu du nœud `<title type="main">` du document TEI.
+
+---
+
+### 4. Transformer le corps TEI en `<body>` HTML
+Créer une règle qui transforme l’élément `body` du document TEI en un élément HTML `<body>`,  
+et appliquer les modèles aux nœuds descendants pour continuer la transformation.
+
+---
+
+### 5. Transformer les éléments textuels du corps
+Créer des règles pour transformer les éléments suivants :
+
+- `head`
+- `dateline`
+- `p`
+- `signed`
+
+Ces éléments TEI doivent être convertis en paragraphes HTML `<p>`.
+
+Pour les éléments `head` et `dateline`, ajouter un **attribut `class`** dont la valeur correspond à celle de l’attribut TEI `@rend`.
+
+---
+
+### 6. Transformer les retours à la ligne
+Créer une règle qui transforme les éléments `lb` (line break) du TEI en éléments HTML `<br/>`.
+
+---
+
+### 7. Transformer les sauts de page
+Créer une règle qui transforme les éléments `pb` (page break) du TEI en une **valeur textuelle** de la forme "[valeur de l'attribut n] "
+---
+
+## Résultat attendu
+À la fin de ce TP, vous devez obtenir une feuille XSLT capable de produire un document HTML correctement structuré à partir d’un document TEI simple.
