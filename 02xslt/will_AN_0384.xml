@@ -1,0 +1,96 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="fr" xml:id="TestamentsDePoilus_will_AN_0384">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title type="corpusTitle">Édition numérique collaborative de testaments de Poilus de la Grande Guerre</title>
+                <title type="main">[Testament de Eugène Adrien Roland Georges Garros (20 juin 1918)] : édition électronique</title>
+                <author>
+                    <persName ref="#pers-526">Eugène Adrien Roland Georges Garros (1888-1918)</persName>
+                </author>
+                <editor ref="#CNougaret">Christine Nougaret</editor>
+                <editor ref="#EdChamps">Emmanuelle de Champs</editor>
+                <editor ref="#FClavaud">Florence Clavaud</editor>
+                <editor ref="#PCharbonnier">Pauline Charbonnier</editor>
+            </titleStmt>
+            <editionStmt>
+                <edition>Première édition électronique, fondée sur un travail de transcription collaborative</edition>
+                <respStmt>
+                    <resp>Numérisation</resp>
+                    <orgName ref="#AN-atelierPhoto">Archives nationales. Direction de l’Appui scientifique. Département de la Conservation. Atelier photographique</orgName>
+                </respStmt>
+                <respStmt>
+                    <resp>Transcription</resp>
+                    <persName ref="#MFGarreau">MFGarreau</persName>
+                    <persName ref="#lelia">Lélia Picabia</persName>
+                    <persName ref="#DAccoulon">DAccoulon</persName>
+                    <persName ref="#GBMireille">Mireille Grais-Bruguière</persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Validation</resp>
+                    <persName ref="#jmorvan">Josselin Morvan</persName>
+                    <persName ref="#CNougaret">Christine Nougaret</persName>
+                    <persName ref="#PCharbonnier">Pauline Charbonnier</persName>
+                </respStmt>
+                <respStmt>
+                    <resp>Corrections hors plate-forme et contrôle de qualité final</resp>
+                    <persName ref="#PCharbonnier">Pauline Charbonnier</persName>
+                    <persName ref="#FClavaud">Florence Clavaud</persName>
+                    <persName ref="#jmorvan">Josselin Morvan</persName>
+                </respStmt>
+            </editionStmt>
+            <publicationStmt>
+                <publisher>
+                    <orgName ref="#AN">Archives nationales</orgName>
+                </publisher>
+                <publisher>
+                    <orgName>Université de Cergy-Pontoise</orgName>
+                </publisher>
+                <publisher>
+                    <orgName ref="#AD78">Archives départementales des Yvelines</orgName>
+                </publisher>
+                <publisher>
+                    <orgName>École nationale des chartes</orgName>
+                </publisher>
+                <publisher>
+                    <orgName ref="#AD95">Archives départementales du Val-d’Oise</orgName>
+                </publisher>
+                <date when="2021-09">septembre 2021</date>
+                <availability>
+                    <licence target="https://creativecommons.org/licenses/by/4.0/">Licence CC BY 4.0</licence>
+                </availability>
+                <idno>TestamentsDePoilus_will_AN_0384</idno>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc xml:id="will_AN_0384_tes">
+                    <msIdentifier>
+                        <country>France</country>
+                        <institution>Archives nationales</institution>
+                        <collection>Minutier central des notaires de Paris</collection>
+                        <idno>MC/ET/LXXXVI/1790, minute du 27 janvier 1919 (dépôt du testament de Eugène Adrien Roland Georges Garros)</idno>
+                        <msName>Testament de Eugène Adrien Roland Georges Garros (20 juin 1918)</msName>
+                    </msIdentifier>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text xml:id="will_AN_0384">
+        <body>
+            <div type="will">
+                <dateline rend="centered"><pb n="1"/>Le vingt juin 1918</dateline>
+                <head>Ceci est mon testament.</head>
+                <p>Ce testament annule le précédent, <lb/>déposé depuis plusieurs années <lb/>chez un notaire de Paris.</p>
+                <p>Je confie à mon père et à mon <lb/>ami Audemars l’exécution du <lb/>présent testament.</p>
+                <p>Mon actif sera réalisé et divisé <lb/>en deux parts égales : l’une <lb/>sera déposée dans une banque, <lb/>pour être remise à ma sœur <lb/>Gilberte le jour de sa majorité. <lb/>L’autre, sera remise immédiatement à mon amie Mademoiselle <lb/>Marcelle Gorge.</p>
+                <p><pb n="2"/>Si je tombe sur le champ de <lb/>bataille, je désire être enterré <lb/>sur place.</p>
+                <p>Je m’oppose formellement à <lb/>toute cérémonie religieuse.</p>
+                <p>Je suis athée. Je ne veux aucun <lb/>signe de croix ni sur mon cercueil <lb/>ni sur ma tombe.</p>
+                <p>Je ne veux pas de fleurs, pas de <lb/>couronnes, surtout aucun discours.</p>
+                <p>Je ne veux pas que ma mère, ni <lb/>ma sœur, ni mon amie, ni mon <lb/>père viennent voir ma dépouille. <lb/>Je ne veux pas qu’ils assistent <lb/>à mes funérailles. Que personne <lb/>n’y soit un spectacle au <pb n="3"/>sadisme de la foule.</p>
+                <p>Mes amis savent que l’inobservation de mes derniers désirs <lb/>serait la plus triste infidélité <lb/>à ma mémoire.</p>
+                <signed rend="centered underlined">Garros</signed>
+            </div>
+        </body>
+    </text>
+</TEI>
