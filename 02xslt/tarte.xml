@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Tarte aux pommes — Recette simple</title>
+            <author>Benoît Pétit</author>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>Les marmittes de Rouen</publisher>
+            <date>2025-10-12</date>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Carnet de recette de la grand mère de Benoît Pétit.</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <div type="recette">
+            <head>Tarte aux pommes</head>
+            <list type="ingredients">
+               <head>Ingrédients</head>
+               <item>1 pâte feuilletée (prête à l'emploi ou maison)</item>
+               <item>4 pommes (type Golden ou Gala)</item>
+               <item>50 g de sucre</item>
+               <item>30 g de beurre</item>
+               <item>1 cuillère à soupe de jus de citron</item>
+               <item>1 cuillère à café de cannelle (facultatif)</item>
+               <item>1 œuf (pour la dorure, facultatif)</item>
+            </list>
+            <list type="preparation">
+               <head>Préparation</head>
+               <item>Préchauffer le four à 180°C (thermostat 6).</item>
+               <item>Étaler la pâte feuilletée dans un moule à tarte et piquer le fond à la fourchette.</item>
+               <item>Éplucher, épépiner et couper les pommes en fines lamelles. Les arroser d'un peu de jus de citron pour éviter qu'elles noircissent.</item>
+               <item>Disposer les lamelles de pommes sur la pâte en cercles concentriques.</item>
+               <item>Parsemer le sucre et la cannelle sur les pommes, puis répartir des petits morceaux de beurre.</item>
+               <item>Si désiré, badigeonner le bord de la pâte avec un œuf battu pour une belle dorure.</item>
+               <item>Cuire au four environ 30–35 minutes, jusqu'à ce que les pommes soient tendres et la pâte dorée.</item>
+               <item>Laisser tiédir avant de démouler et servir.</item>
+            </list>
+         </div>
+      </body>
+   </text>
+</TEI>
