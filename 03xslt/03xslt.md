@@ -14,11 +14,67 @@ mainfont: "IBM Plex Sans"
 monofont: "IBM Plex Mono"
 ---
 
----
-
 ## XSLT
 
 *eXstensible Stylesheet Language Transformations*
+
+---
+
+## Les modes
+
+Parfois, on a besoin d’appliquer plusieurs traitements à un même ensemble de
+nœuds.
+
+Par exemple pour une sortie HTML, on peut souhaiter appliquer deux traitements
+pour les titres de chapitre :
+
+- les placer dans des balises `<h2/>` pour le corps du document ;
+- en faire des éléments de liste `<li/>` afin de produire automatiquement une
+table des matières.
+
+---
+
+## Les modes
+
+Plusieurs solutions peuvent être envisagées avec XSLT, mais l’approche modale
+est certainement la plus commode.
+
+On utilise l’attribut `@mode` des éléments `<xsl:template/>` et
+`<xsl:apply-templates />` afin de définir plusieurs règles modèles et les
+appeler de manière distincte.
+
+---
+
+## Les modes - définir des templates
+
+```xml
+<xsl:template match="div[@type='chapter']/head">
+    <h2><xsl:apply-templates/></h2>
+</xsl:template>
+
+<xsl:template match="div[@type='chapter']/head" mode="toc">
+    <li><xsl:apply-templates/></li>
+</xsl:template>
+```
+
+---
+
+## Les modes - appeler les templates
+
+```xml
+<xsl:template match="TEI">
+    <html>
+        <head><title>Le dernier jour d’un condamné</title></head>
+        <body>
+            <ul>
+                <xsl:apply-templates
+                    select="//div/head" mode="toc"/>
+            </ul>
+            <xsl:apply-templates/>
+        </body>
+    </html>
+</xsl:template>
+```
 
 ---
 
@@ -33,8 +89,6 @@ Il peuvent prendre exactement 2 formes : la forme *simple* et la forme *complè
 ---
 
 ## Les tests simples
-
-**1re forme simple**
 
 ```
 si booléen alors
@@ -82,8 +136,6 @@ Si la balise `<p/>` dispose d'un attribut `@rend`, alors on ajoute en sortie un 
 
 ## Les tests complets
 
-**2e forme complète**
-
 ```
 si booléen alors
     instruction 1
@@ -117,19 +169,16 @@ Si aucun test n’est vérifié mais qu'une instruction `<xsl:otherwise/>` est p
 ## Les tests complets - exemple
 
 ```xml
-<xsl:template match="hi">
+<xsl:template match="head">
     <xsl:choose>
-        <xsl:when test="@rend = 'bold'">
-            <strong><xsl:apply-templates/></strong>
+        <xsl:when test="parent::div[@type = 'book']">
+            <h1><xsl:apply-templates/></h1>
         </xsl:when>
-        <xsl:when test="@rend = 'italic'">
-            <em><xsl:apply-templates/></em>
-        </xsl:when>
-        <xsl:when test="@rend = 'superscript'">
-            <sup><xsl:apply-templates/></sup>
+        <xsl:when test="parent::div[@type = 'chapter']">
+            <h2><xsl:apply-templates/></h2>
         </xsl:when>
         <xsl:otherwise>
-            <span class="{ @rend }"><xsl:apply-templates/></span>
+            <h3><xsl:apply-templates/></h3>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -179,8 +228,7 @@ FINPOUR
 
 XSLT est un langage de programmation *fonctionnel*, et en tant que tel, il diffère des langages de programmation *procéduraux*.
 
-Cet approche *fonctionnelle* permet bien souvent de se passer des boucles en utilisant simplement des règles modèles ; mais voyons tout de même ce que permettent de faire les éléments `<xsl:for-each/>` et `<xsl:for-each-group/>`.
-
+Cet approche *fonctionnelle* permet bien souvent de se passer des boucles en utilisant simplement des règles modèles ; mais voyons tout de même ce que permet de faire l’élément `<xsl:for-each/>`.
 
 ---
 
@@ -197,52 +245,22 @@ Cet approche *fonctionnelle* permet bien souvent de se passer des boucles en uti
    </ul>
 </xsl:template>
 ```
----
-
-@todo ajouter une dia en faisant la même chose mais uniquement avec des règles modèles ?
 
 ---
 
-## Les boucles `<xsl:for-each-group/>`
-
-L'instruction `<xsl:for-each-group/>` permet d’itérer non pas sur un ensemble de nœuds, mais sur des **groupes** de nœuds.
-
-- l'attribut `@select` identifie les nœuds à grouper ;
-- les attributs `@group-by`, `@group-adjacent`, `@group-starting-with` et `@group-ending-with` indiquent comment les grouper.
-
-- la fonction `current-groupin-key()` retourne la clé de regroupement (si `@group-by`) ;
-- la fonction `current-group()` retourne le groupe courant.
-
----
-
-## Trier avec `<xsl:sort/>`
-
-L’instruction `<xsl:sort/>` permet de trier des nœuds afin, par exemple de les ordonner alphabétiquement.
-
-Il s'utilise comme enfant des éléments `<xsl:apply-templates/>` et `<xsl:for-each/>`.
-
-- l'attribut `@select` correspond à la clé de tri ;
-- l'attribut `@order` définie le sens du tri (ascendant ou descendant)
-- l'attribut `@data-type` permet de préciser si l’on souhaite un tri alphabétique ou numérique
-
----
-
-## Trier avec `<xsl:sort/>`
+## Les boucles `<xsl:for-each/>` - l'approche fonctionnelle
 
 ```xml
-<list>
-   <item>c</item>
-   <item>a</item>
-   <item>b</item>
-</list>
-
 <xsl:template match="list">
-    <xsl:apply-templates select="item">
-        <xsl:sort select="."/>
-    </xsl:apply-templates>
+    <ul>
+        <xsl:apply-templates/>
+    </ul>
+</xsl:template>
+
+<xsl:template match="item">
+    <li>
+        <xsl:apply-templates/>
+    </li>
 </xsl:template>
 ```
-
-résultat : `abc`
-
 ---

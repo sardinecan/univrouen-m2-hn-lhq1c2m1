@@ -12,10 +12,6 @@ aspectratio: 169
 syntax-highlighting: tango
 mainfont: "IBM Plex Sans"
 monofont: "IBM Plex Mono"
-fontsize: 11pt
-header-includes:
-    - \setbeamerfont{title}{size=\Huge}
-    - \setbeamerfont{frametitle}{size=\large, series=\bfseries}
 ---
 
 ## Calendrier des cours
@@ -74,7 +70,7 @@ Un *nœud* correspond à une composante d'un arbre pouvant contenir une sous-arb
 
 ---
 
-**Exercice**
+## Éléments de définition : arborescence - **Exercice**
 
 Représenter cet arbre XML :
 
@@ -114,7 +110,7 @@ Une expression *XPath* est un **chemin** composé d'une série d'étapes, où ch
 
 ---
 
-## Chemins de localisation : exercice {.shrink} 
+## Chemins de localisation : exercice {.shrink}
 
 Par quelles étapes doit-on passer pour arriver à l'élément `<title/>` ?
 
@@ -126,7 +122,7 @@ Par quelles étapes doit-on passer pour arriver à l'élément `<title/>` ?
     </titleStmt>
 </fileDesc>
 ```
-\pause 
+\pause
 
 On commence à l'élément `<fileDesc/>`, puis on passe à l'élément *fils* `<titleStmt/>`  et enfin on arrive au titre `<title/>`.
 
@@ -139,9 +135,9 @@ Avec XPath : `/fileDesc/titleStmt/title`
 ## Chemins de localisation : départ et étapes
 
 - Le point de départ d'un chemin XPath peut être :
-    - la racine (`/`), 
+    - la racine (`/`),
     - le nœud contextuel (`.`),
-    - le nœud parent (`..`), 
+    - le nœud parent (`..`),
     - ou *n'importe où* (`//`) ;
 - chaque étape est séparée de la précédente par l'opérateur `/`.
 

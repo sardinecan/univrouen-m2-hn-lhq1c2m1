@@ -14,8 +14,6 @@ mainfont: "IBM Plex Sans"
 monofont: "IBM Plex Mono"
 ---
 
----
-
 ## XSLT
 
 *eXstensible Stylesheet Language Transformations*
@@ -30,17 +28,15 @@ XSLT est un langage de transformation. Cette application XML permet de transform
 
 ## Une première transformation
 
-Avec XSLT, on peut très facilement transformer ceci : 
+Avec XSLT, on peut très facilement transformer ceci :
 
 ```xml
-<head rend="alignCenter">Chapitre 1 : <emph>XSLT</emph></head>
 <ref target="www.w3.org/TR/xslt-30/">The <emph>XSLT</emph> Standard</ref>
 ```
 
-et produire : 
+et produire :
 
 ```xml
-<h1 class="alignCenter">Chapitre 1 : <em>XSLT</em></h1>
 <a href="www.w3.org/TR/xslt-30/">The <em>XSLT</em> Standard</a>
 ```
 
@@ -48,13 +44,11 @@ Pour cela il faut simplement :
 
 \pause
 
-- transformer l’élément TEI `<head/>` en un élément (x)HTML `<h1/>` ;
 - transformer l'élément TEI `<ref/>` en un élément (X)HTML `<a/>`
 
 \pause
 
-- transformerl'attribut `@class` en un attribut `@rend`.
-- transformerl'attribut `@target` en un attribut `@href`.
+- transformer l'attribut `@target` en un attribut `@href`.
 
 \pause
 
@@ -69,7 +63,6 @@ Pour cela il faut simplement :
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0">
-
   <xsl:template match="ref">
     <a href="{ @target }"><xsl:apply-templates/></a>
   </xsl:template>
@@ -77,7 +70,6 @@ Pour cela il faut simplement :
   <xsl:template match="emph">
     <em><xsl:apply-templates/></em>
   </xsl:template>
-
 </xsl:stylesheet>
 ```
 
@@ -85,10 +77,10 @@ Pour cela il faut simplement :
 
 ## Anatomie d'une feuille de transformation
 
-- Une feuille de style XSLT est un document XML
+- une feuille de style XSLT est un document XML
 - l’élément racine est au choix `<xsl:stylesheet/>` ou `<xs:transform/>`
 - les éléments XSLT sont dans l'espace de nom `http://www.w3.org/1999/XSL/Transform`
-- Cet espace de noms est généralement associé au préfixe `xsl`
+- Cet espace de nom est généralement associé au préfixe `xsl`
 - la version de la norme XSLT utilisée est indiquée sur l’élément racine avec l'attribut `@version` (`1.0`, `2.0` ou `3.0`)
 
 ---
@@ -133,9 +125,7 @@ S'il n'y a pas de règle modèle dont le **motif** correspond au(x) nœud(s), un
 
 ## Appliquer des modèles - les règles intégrées
 
-**Exercice**
-
-Appliquer la feuille XSLT suivante sur un document XML. Que remarque-t-on ?
+Appliquez la feuille XSLT suivante sur un document XML.
 
 ```xml
 <xsl:stylesheet
@@ -143,8 +133,18 @@ Appliquer la feuille XSLT suivante sur un document XML. Que remarque-t-on ?
     version="2.0">
 
 </xsl:stylesheet>
-
 ```
+
+---
+
+## Appliquer des modèles - les règles intégrées
+
+Que remarque-t-on ?
+
+\pause
+- le résultat n’est pas un document XML
+\pause
+- les balises et les attributs ont été supprimés
 
 ---
 
@@ -167,12 +167,6 @@ Appliquer la feuille XSLT suivante sur un document XML. Que remarque-t-on ?
 ```
 
 ---
-## Appliquer des modèles - les règles intégrées
-
-- le résultat n’est pas un document XML
-- les balises et les attributs ont été supprimés
-
----
 
 ## Appliquer des modèles
 
@@ -188,22 +182,9 @@ Par défaut, l'instruction `<xsl:apply-templates/>` examine, dans l'ordre, les e
 </xsl:template>
 ```
 
-résultat :
-
-```xml
-<em>XSLT</em>
-```
+résultat : `<em>XSLT</em>`
 
 ---
-<!--
-## Appliquer des modèles `<xsl:apply-templates/>`
-
-Nous l'avons vu, le processeur XSLT parcours le document XML de haut en bas. Les règles modèles sont donc appliquées dans l'ordre dans lequel apparaissent les éléments dans l'arbre. Cela signifie qu'une règle modèle d'un élément parent est appliquée avant les règles modèles des nœuds fils.
-
-Les règles modèles peuvent de ce fait empêcher le traitement d'éléments particuliers. Dans les exemples précédents, elles empêchent implicitement le traitement des nœuds contenus dans l'élément `<head/>`.
-
----
--->
 
 ## Appliquer du texte - *literal data characters*
 
@@ -225,7 +206,7 @@ Implicitement, on a demandé au processeur XSLT de ne pas descendre plus loin da
 
 ## Déclarer un élément
 
-Bien évidemment, on peut aussi imprimer des nœuds en sortie (*literal result elements*)
+Bien évidemment, on peut aussi ajouter des nœuds en sortie (*literal result elements*)
 
 ```xml
 <xsl:stylesheet
@@ -238,11 +219,7 @@ Bien évidemment, on peut aussi imprimer des nœuds en sortie (*literal result e
 </xsl:stylesheet>
 ```
 
-Le résultat en sortie sera alors :
-
-```xml
-<a>XML</a>
-```
+Le résultat en sortie sera alors : `<a>XML</a>`
 
 ---
 
@@ -254,11 +231,7 @@ On peut déclarer un élément de différentes manières :
 <xsl:template match="ref">
     <a><xsl:apply-templates/></a>
 </xsl:template>
-```
 
-Il est possible de faire la même chose avec la balise `<xsl:element/>`
-
-```xml
 <xsl:template match="ref">
     <xsl:element name="a"><xsl:apply-templates/></xsl:element>
 </xsl:template>
@@ -270,22 +243,16 @@ Il est possible de faire la même chose avec la balise `<xsl:element/>`
 
 Tout comme les éléments, plusieurs méthodes existent pour déclarer des attributs :
 
-- soit en l'ajoutant directement :
-
 ```xml
 <xsl:template match="ref">
-    <a href="http://unlien.org">Un lien</a>
+  <a href="http://unlien.org">Un lien</a>
 </xsl:template>
-```
 
-- soit avec la balise `<xsl:attribute/>`
-
-```xml
 <xsl:template match="ref">
-    <xsl:element name="a">
-         <xsl:attribute name="href">http://unlien.org</xsl:attribute>
-         <xsl:apply-templates/>
-    </xsl:element>
+  <xsl:element name="a">
+    <xsl:attribute name="href">http://unlien.org</xsl:attribute>
+    <xsl:apply-templates/>
+  </xsl:element>
 </xsl:template>
 ```
 
@@ -297,15 +264,11 @@ On peut également définir la valeur de l'attribut avec une expression XPath :
 
 ```xml
 <xsl:template match="ref">
-    <a class="{ ./@target }">
+    <a href="{ ./@target }">
         <xsl:apply-templates/>
     </a>
 </xsl:template>
-```
 
-ou
-
-```xml
 <xsl:template match="ref">
     <xsl:element name="a">
          <xsl:attribute name="href" select="@target"/>
@@ -318,7 +281,7 @@ ou
 
 ## Valeur textuelle d’un nœud `<xsl:value-of/>`
 
-Lorsque l'on souhaite uniquement accéder à la valeur textuelle d'un nœud, on utilise l'élément `<xf:value-of />`. La valeur textuelle d'un nœud correspond au contenu d'un élément une fois que toutes les balises ont été retirées.
+Lorsque l'on souhaite uniquement accéder à la valeur textuelle d'un nœud, on utilise l'élément `<xsl:value-of />`. La valeur textuelle d'un nœud correspond au contenu d'un élément une fois que toutes les balises ont été retirées.
 
 ```xml
 <xsl:template match="ref">
@@ -326,56 +289,6 @@ Lorsque l'on souhaite uniquement accéder à la valeur textuelle d'un nœud, on 
 </xsl:template>
 ```
 
-résultat :
-
-```xml
-The XSLT Standard
-```
-
----
-
-## Copier `<xsl:copy-of/>` et `<xsl:copy-of/>`
-
-L'élément `<xsl:copy-of/>` permet d'ajouter dans l'arbre de sortie un élément de l'arbre d'entrée, sans le modifier.
-
-```xml
-<xsl:template match="ref">
-    <a href="{ ./@target }"><xsl:apply-templates/></a>
-    <xsl:copy-of select="."/>
-</xsl:template>
-
-<xsl:template match="emph">
-    <em><xsl:apply-templates/></em>
-</xsl:template>
-```
-
-Résultat :
-
-```xml
-<a href="www.w3.org/TR/xslt-30/">The <em>XSLT</em> Standard</a>
-<ref target="www.w3.org/TR/xslt-30/">The <emph>XSLT</emph> Standard</ref>
-```
-
----
-
-## Copier `<xsl:copy-of/>` et `<xsl:copy-of/>`
-
-L'élément `<xsl:copy/>` crée une paire de balises (ouvrante et fermante) dont le nom est celui de l'élément courant, mais ni les nœuds descendants, ni les attributs ne sont copiés.
-
-```xml
-<xsl:template match="ref">
-    <xsl:copy><xsl:apply-templates/></xsl:copy>
-</xsl:template>
-
-<xsl:template match="emph">
-    <em><xsl:apply-templates/></em>
-</xsl:template>
-```
-
-Résultat :
-
-```xml
-<ref>The <em>XSLT</em> Standard</ref>
-```
+résultat : `The XSLT Standard`
 
 ---

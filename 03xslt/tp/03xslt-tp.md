@@ -1,11 +1,11 @@
 # TP 03 XSLT
 
 ## Objectif
-Modifier la feuille de transformation réalisée lors du TP 2.
+Modifier la feuille de transformation réalisée lors du TP 02.
 
 ## Exercice
 
-Ouvrir le testament de Henri Jules Barbier (`will_AN_0409.xml`) et le fichier `teitohtml.xsl` dans Oxygen, puis créez ou modifiez les règles suivantes :
+Ouvrir le testament de Henri Jules Barbier (`will_AN_0409.xml`) et le fichier `teitohtml.xsl` réalisé lors du TP 02 dans Oxygen, puis créer ou modifier les règles suivantes :
 
 ### 1. choice
 
@@ -23,11 +23,12 @@ Créez une règle afin d’instancier les éléments `<supplied/>` entre crochet
 
 À l'aide d'une requête XPath, recherchez les valeurs uniques des attributs `@rend`.
 
-Créez une règle pour chaque valeur de `hi/@rend`.
+Créez une règle pour chaque valeur de `hi/@rend` en utilisant un `test`.
 
 ### 4. pb
 
 Ajoutez une règle pour les éléments `<pb/>` et créez une variable pour numéroter les changements de page.
+
 En sortie, placez le numéro de page entre crochets `[]`.
 
 ### 5. Notes
@@ -35,12 +36,14 @@ En sortie, placez le numéro de page entre crochets `[]`.
 #### 5.1. Appels
 
 Ajoutez une règle pour les éléments `<note/>`. :
+
 - créez une variable pour numéroter l’élément `note`
 - en sortie, placer le numéro de la note en exposant (balise HTML `<sup/>`)
 
 #### 5.2 pieds de page
 
 Ajouter une règle modale pour les éléments `<note/>` (p. ex. `mode="footnote"`)
+
 - numérotez les notes comme ci-dessus
 - instanciez l'appel de note et le contenu de la note dans un élément `<p/>`
 - modifiez le modèle de l’élément `<body/>` pour appliquez la règle modale
