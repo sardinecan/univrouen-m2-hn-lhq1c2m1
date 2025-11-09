@@ -78,6 +78,78 @@ appeler de manière distincte.
 
 ---
 
+## Les variables - `<xsl:variable/>`
+
+Une variables est un espace mémoire **nommé** dont la valeur peut être de n'importe quel type :
+
+- chaîne de caractères
+- nombre
+- ensemble de nœuds
+
+---
+
+## Les variables - `<xsl:variable/>`
+
+```xml
+<xsl:variable name="id" select="@xml:id"/>
+
+<xsl:variable name="var">Hello World</xsl:variable>
+```
+
+---
+
+## Les variables - Déréférencement
+
+Pour appeler une variable, on utilise une expression de la forme `$nomVariable`.
+
+```xml
+<xsl:template match="div">
+    <xsl:variable name="id" select="@xml:id"/>
+    <section id="{ $id }">
+        <xsl:apply-template/>
+    </section>
+</xsl:template>
+```
+
+---
+
+## Les variables - Portée
+
+Les variables disposent d'une portée. Cela signifie qu'elles peuvent être appelées uniquement dans le contexte dans lequel elles ont été définies.
+
+```xml
+<xsl:variable name="msg" select="'Hello World!'">
+<xsl:template match="div">
+    <xsl:variable name="id" select="@xml:id"/>
+    <section id="{ $id }">
+        <xsl:apply-template/>
+    </section>
+</xsl:template>
+<xsl:template match="p">
+<!-- impossible ici d'appeler $id, mais on peut appeler $msg-->
+<xsl:value-of select="$msg">
+<xsl:template>
+```
+
+---
+
+## Numéroter - `<xsl:number/>`
+
+L’élément `<xsl:number/>` retourne un entier formaté. Il est souvent utilisé pour numéroter des nœuds :
+
+- `@count` : expression XPath indiquant les nœuds à compter
+- `@level` : défini le nombre de niveaux `"single"` (1, 2, 3, etc.) | "`multiple`" (I.1, I.2, etc.) | `"any"` (dépend de `@from`)
+- `@from` : nœud qui sert de point de départ à la numérotation
+- `@format` : format de numérotation `"1"`, `"I"`, `"i"`, `"a"`, `"A"`, etc.
+
+```xml
+<xsl:template match="l">
+    <xsl:number count="l" from="lg" level="single"/>
+</xsl:template>
+```
+
+---
+
 ## Les tests
 
 Les tests correspondent à une instruction conditionnelle. C’est-à-dire que l'on va tester une ou plusieurs conditions et appliquer des instructions différentes suivant le résultat du test.
