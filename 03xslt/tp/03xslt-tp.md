@@ -5,17 +5,25 @@ Modifier la feuille de transformation réalisée lors du TP 02.
 
 ## Exercice
 
-Ouvrir le testament de Henri Jules Barbier (`will_AN_0409.xml`) et le fichier `teitohtml.xsl` réalisé lors du TP 02 dans Oxygen, puis créer ou modifier les règles suivantes :
+Ouvrir le testament de Henri Jules Barbier (`will_AN_0409.xml`) et le fichier XSLT réalisé lors du TP 02 dans Oxygen, puis créer ou modifier les règles suivantes :
 
-### 1. choice
+### 1. head, dateline, p, signed
+
+Réécrirez les règles pour les éléments `<head/>`, `<dateline/>`, `<p/>` et `<signed/>` afin de les regrouper en une règle unique, et implémentez un test afin d'ajouter une classe (`@class`) si un attribut `@rend` est présent.
+
+### 2. div
+
+Ajoutez une règles pour transformer les éléments TEI `<div/>` en élément HTML `<section/>`. L'attribut `@type` doit devenir une classe. N'oubliez pas d'appliquer les templates.
+
+### 3. choice
 
 Ajoutez une règle afin que seuls les éléments `<corr/>` et `<expan/>` soient instanciés dans les éléments `<choice/>`
 
-### 2. del
+### 4. del et add
 
-Créez une règle pour supprimer les nœuds `<del/>` en sortie
+Créez une règle pour supprimer les nœuds `<del/>` et `<add type='testatorComment'/>` en sortie
 
-### 3. supplied
+### 5. supplied
 
 Créez une règle afin d’instancier les éléments `<supplied/>` entre crochets droits `[]`
 
@@ -25,25 +33,25 @@ Créez une règle afin d’instancier les éléments `<supplied/>` entre crochet
 
 Créez une règle pour chaque valeur de `hi/@rend` en utilisant un `test`.
 
-### 4. pb
+### 7. pb
 
 Ajoutez une règle pour les éléments `<pb/>` et créez une variable pour numéroter les changements de page.
 
 En sortie, placez le numéro de page entre crochets `[]`.
 
-### 5. Notes
+### 8. Notes
 
-#### 5.1. Appels
+#### 8.1. Appels
 
 Ajoutez une règle pour les éléments `<note/>`. :
 
 - créez une variable pour numéroter l’élément `note`
 - en sortie, placer le numéro de la note en exposant (balise HTML `<sup/>`)
 
-#### 5.2 pieds de page
+#### 8.2 pieds de page
 
 Ajouter une règle modale pour les éléments `<note/>` (p. ex. `mode="footnote"`)
 
 - numérotez les notes comme ci-dessus
 - instanciez l'appel de note et le contenu de la note dans un élément `<p/>`
-- modifiez le modèle de l’élément `<body/>` pour appliquez la règle modale
+- modifiez le modèle de l’élément `<div/>` afin d’appliquez la règle modale
