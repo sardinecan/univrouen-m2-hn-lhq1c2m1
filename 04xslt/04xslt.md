@@ -20,6 +20,22 @@ monofont: "IBM Plex Mono"
 
 ---
 
+## Espace de nom XPath par défaut
+
+Pour déclarer un espace de nom XPath par défaut, on utilise l'attribut `@xpath-default-namespace`. Il n'est alors pas nécessaire de préfixer les expressions XPath avec `*:` (ou `tei:` si utilisation de `xmlns:tei`)
+
+```xml
+<xsl:stylesheet
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+   exclude-result-prefixes="xs"
+   version="2.0">
+</xsl:stylesheet>
+```
+
+---
+
 ## Paramètres de sortie - `<xsl:output/>`
 
 L’élément `<xsl:output/>` permet de configurer les paramètres de sortie :
@@ -36,7 +52,7 @@ L’élément `<xsl:output/>` permet de configurer les paramètres de sortie :
 
 L’élément `<xsl:result-document/>` est utilisé pour diriger la sortie vers une destination secondaire, par exemple un fichier, un mail, une URI, etc.
 
-Il est très intéressant pour produire plusieurs fichiers automatiquement.
+Il est très intéressant pour produire plusieurs fichiers automatiquement à partir d’une même source.
 
 ---
 
@@ -53,6 +69,89 @@ Il est très intéressant pour produire plusieurs fichiers automatiquement.
         </html>
         <xsl:apply-templates/>
     </xsl:result-document>
+</xsl:template>
+```
+
+---
+
+## `<xsl:call-template/>`
+
+L'instruction `call-template` permet d’appeler un template par son nom :
+
+```xml
+<xsl:template name='monTemplate'>
+    <!-- modèle -->
+</xsl:template>
+
+<xsl:template match="/">
+    <xsl:call-template name="monTemplate"/>
+</xsl:template>
+
+```
+
+---
+
+## `<xsl:call-template/>`
+
+Cette méthode est très utile, car elle permet de hiérarchiser les feuilles XSLT en créant des templates avec un rôle bien défini.
+
+Par exemple, nous avons vu qu’avec l’instruction `<xsl:result-document/>` il était possible de générer un site composé de plusieurs pages à partir d’une unique source XML.
+
+---
+
+## `<xsl:call-template/>`
+
+```xml
+<xsl:template match="/">
+    <xsl:result-document href="index.html">
+        <html><!-- … --></html>
+    </xsl:result-document>
+    <xsl:for-each select="./descendant::TEI">
+        <xsl:result-document href="{./@xml:id}.html">
+            <html><!-- … --></html>
+        </xsl:result-document>
+    </xsl:for-each>
+    <xsl:result-document href="about.html">
+        <html><!-- … --></html>
+    </xsl:result-document>
+</xsl:template>
+```
+---
+
+## `<xsl:call-template/>`
+
+Toutefois, cette méthode est très verbeuse : p. ex. on répète les éléments de structure HTML alors qu’ils pourraient être partagés.
+
+---
+
+## `<xsl:call-template/>` - exemple simple
+
+`call-template` agit comme `apply-templates` mais pour un template *nommé* :
+
+```xml
+<xsl:template match="/">
+    <xsl:call-template name="content"/>
+</xsl:template>
+<xsl:template name="content">
+    <p>Hello World!</p>
+</xsl:template>
+```
+
+---
+
+## `<xsl:call-template/>` - `<xsl:with-param/>`
+
+L’instruction `with-param` permet de passer des paramètres au modèle, qui les reçoit par l'intermédiaire  de `param` :
+
+```xml
+<xsl:template match="/">
+    <xsl:call-template name="content">
+        <xsl:with-param name="name" select="'John'"/>
+    </xsl:call-template>
+</xsl:template>
+<xsl:template name="content">
+    <xsl:param name="name"/>
+    Bonjour <xsl:value-of select="$name"/> ! 🦖
 </xsl:template>
 ```
 
@@ -159,10 +258,10 @@ L'instruction `<xsl:for-each-group/>` permet d’itérer non pas sur un ensemble
 
 ---
 
-## Les règles modèles nommées
+Chapitres absents de cette introduction à XSLT :
 
----
-
-## Les fonctions
+- les fonctions
+- transformations XML vers XML
+- transformations XML vers texte (et \LaTeX)
 
 ---
